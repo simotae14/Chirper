@@ -4,6 +4,7 @@ import { formatTweet, formatDate } from "../utils/helpers";
 import TiArrowBackOutline from "react-icons/lib/ti/arrow-back-outline";
 import TiHeartOutline from "react-icons/lib/ti/heart-outline";
 import TiHeartFullOutline from "react-icons/lib/ti/heart-full-outline";
+import { handleToggleTweet } from "../actions/tweets";
 
 class Tweet extends Component {
 	// definisco la funzione del like
@@ -11,7 +12,13 @@ class Tweet extends Component {
 		e.preventDefault();
 
 		// Todo: handle Like tweets
+		const { dispatch, authedUser, tweet } = this.props;
 
+		dispatch(handleToggleTweet({
+			id: tweet.id,
+			hasLiked: tweet.hasLiked,
+			authedUser
+		}))
 	}
 	// definisco la funzione del reply
 	toParent = (e, id) => {
